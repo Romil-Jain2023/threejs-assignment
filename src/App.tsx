@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as THREE from 'three';
 // import * as dat from 'dat.gui';
-import { Scene } from './Scene';
-import { PCDModel } from './PCDLoader';
-import { StatsComponent } from './Stats';
-import './app.css';
+import { Scene } from './classes/Scene';
+import { PCDModel } from './classes/PCDLoader';
+import { StatsComponent } from './classes/Stats';
+import './css/app.css';
 
 class App extends React.Component {
   state = {
