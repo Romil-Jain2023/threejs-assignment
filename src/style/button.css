@@ -1,5 +1,5 @@
 button {
-	position: absolute;
+    position: absolute;
     color: white;
     background-color: black;
     border: none;
@@ -7,14 +7,14 @@ button {
     font-size: 22px;
 }
 
-.leftBtn{
-	z-index: 1;
+.leftBtn {
+    z-index: 1;
     left: 5px;
-	top: 50%;
+    top: 50%;
 }
 
-.rightBtn{
-	z-index: 1;
+.rightBtn {
+    z-index: 1;
     right: 5px;
-	top: 50%;
+    top: 50%;
 }
