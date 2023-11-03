@@ -1,15 +1,11 @@
 import Scene from '../object/ObjectScene';
 import { PCDModel } from '../common/classes/PCDLoader';
 
-
 export const enum DirectionType {
     'LEFT', "RIGHT"
 }
 
-export const loadNewFile = (pcdFile: string, scene: Scene, renderFunc: () => void, pcdModel: PCDModel): void => {
-    if (!pcdModel) {
-        pcdModel = new PCDModel();
-    }
+export const loadNewFile = (pcdFile: string, scene: Scene, renderFunc: () => void, pcdModel:PCDModel): void => {
     pcdModel.loadModel(`./models/${pcdFile}.pcd`, (points) => {
         points.geometry.center();
         points.geometry.rotateX(Math.PI);

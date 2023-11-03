@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { PCDModel } from '../common/classes/PCDLoader';
-import { loadNewFile, handleClick, DirectionType } from '../utility/ButtonHelper';
 import Scene from '../common/classes/Scene';
+import { loadNewFile, handleClick, DirectionType } from '../utility/ButtonHelper';
 import '../style/button.css';
 
 type ButtonProps = {
@@ -11,9 +11,8 @@ type ButtonProps = {
 };
 
 const Button: React.FC<ButtonProps> = (props:ButtonProps): JSX.Element => {
-
     const [pcdFile, setPcdFile] = useState('file1');
-    let pcdModel: PCDModel;
+    const pcdModel = new PCDModel();
 
     useEffect(() => {
         const axesHelper = new THREE.AxesHelper();
