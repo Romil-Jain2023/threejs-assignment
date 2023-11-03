@@ -1,12 +1,10 @@
 import * as THREE from 'three';
-import ICameraPosition from '../interfaces/CameraInterface';
-
 export default class Camera {
 
   private camera: THREE.PerspectiveCamera;
 
-  constructor() {
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+  constructor(fov: number, aspect: number, near: number, far: number) {
+    this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this.camera.position.z = 2;
   }
 
@@ -14,19 +12,19 @@ export default class Camera {
     return this.camera;
   }
 
-  set cameraPosition(position:ICameraPosition){
-    let {x, y, z} = position;
+  // set cameraPosition(position:ICameraPosition){
+  //   let {x, y, z} = position;
 
-    if(x){
-      this.camera.position.x = x;
-    }
+  //   if(x){
+  //     this.camera.position.x = x;
+  //   }
 
-    if(y){
-      this.camera.position.y = y;
-    }
+  //   if(y){
+  //     this.camera.position.y = y;
+  //   }
 
-    if(z){
-      this.camera.position.z = z;
-    }
-  }
+  //   if(z){
+  //     this.camera.position.z = z;
+  //   }
+  // }
 }

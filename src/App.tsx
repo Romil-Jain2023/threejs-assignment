@@ -1,25 +1,30 @@
 import React, { useEffect } from "react";
-import Button from './component/Button';
-import Scene from './object/Scene';
-import Camera from './common/classes/Camera';
-import Renderer from './object/WebGLRenderer';
-import IComponentProps from "./common/interfaces/AppInterface";
+import ObjectScene from './object/ObjectScene';
+import ObjectRenderer from './object/ObjectWebGLRenderer';
+import CameraClass from './common/classes/Camera';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import ToggleButton from './component/ToggleButton';
 
-const App: React.FC<IComponentProps> = (): JSX.Element => {
-  let renderer = new Renderer();
-  let scene = new Scene();
-  let camera = new Camera();
+const App: React.FC = (): JSX.Element => {
+  let renderer: ObjectRenderer;
+  let camera: CameraClass;
   let orbit: OrbitControls;
+  let scene = new ObjectScene();
+
 
   useEffect(() => {
+    renderer = new ObjectRenderer();
+    camera = new CameraClass(75, window.innerWidth / window.innerHeight, 0.01, 1000);
     orbit = new OrbitControls(camera.fetchCamera, renderer.fetchRenderer.domElement);
+    renderer?.fetchRenderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.fetchRenderer.domElement);
+
     window.addEventListener('resize', onWindowResize, false);
     animate();
   }, []);
 
   const onWindowResize = (): void => {
-    if (scene) {
+    if (camera) {
       renderer.onWindowResize(camera.fetchCamera);
     }
   };
@@ -31,11 +36,13 @@ const App: React.FC<IComponentProps> = (): JSX.Element => {
   };
 
   const renderFunc = (): void => {
-    renderer.render({ scene: scene.fetchScene, camera: camera.fetchCamera });
+    renderer?.render({ scene: scene.fetchScene, camera: camera.fetchCamera });
   };
 
   return (
-    <Button scene={scene} renderFunc={renderFunc} />
+    <div>
+      <ToggleButton scene={scene} renderFunc={renderFunc} />
+    </div>
   )
 };
 

@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
-import IButton from '../common/interfaces/ButtonInterface';
-import { DirectionType } from '../common/enums/ButtonEnum';
 import { PCDModel } from '../common/classes/PCDLoader';
-import { loadNewFile, handleClick } from '../helper/ButtonHelper';
+import { loadNewFile, handleClick, DirectionType } from '../utility/ButtonHelper';
+import Scene from '../common/classes/Scene';
 import '../style/button.css';
 
-const Button: React.FC<IButton> = (props): JSX.Element => {
+type ButtonProps = {
+    scene: Scene;
+    renderFunc: () => void;
+};
 
-    const [pcdFile, setPcdFile] = useState<string>('file1');
-    let { scene, renderFunc } = props;
+const Button: React.FC<ButtonProps> = (props:ButtonProps): JSX.Element => {
+
+    const [pcdFile, setPcdFile] = useState('file1');
     let pcdModel: PCDModel;
 
     useEffect(() => {
         const axesHelper = new THREE.AxesHelper();
-        scene.add(axesHelper);
-        loadNewFile(pcdFile, scene, renderFunc, pcdModel);
+        props.scene.add(axesHelper);
+        loadNewFile(pcdFile, props.scene, props.renderFunc, pcdModel);
     }, [pcdFile]);
 
     const handleButtonClick = (dir: DirectionType):void => {
-        let frame = handleClick(dir, pcdFile, scene)!;
+        let frame = handleClick(dir, pcdFile, props.scene)!;
         if (frame) {
             setPcdFile(frame);
         }

@@ -7,7 +7,7 @@ export class PCDModel {
     this.loader = new PCDLoader();
   }
 
-  loadModel(path: string, callback: (points: any) => void) {
+  loadModel(path: string, callback: (points:any) => void) {
     this.loader.load(path, callback);
   }
 }
